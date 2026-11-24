@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper Games</title>
+<style>
+  :root { --board: #22352B; --chalk: #F1EEE4; --yellow: #F2CF5B; --soft: rgba(241, 238, 228, .7); }
+  html, body { margin: 0; background: var(--board); color: var(--chalk); font-family: Georgia, 'Times New Roman', serif; }
+  main { max-width: 34rem; margin: 0 auto; padding: 2.5rem 1rem; }
+  h1 { font-size: 2rem; margin: 0 0 .4rem; letter-spacing: .02em; }
+  p { line-height: 1.45; color: var(--soft); }
+  .game { border: 2px solid var(--chalk); border-radius: 8px 13px 9px 14px; padding: 1rem 1.1rem; margin: 1.4rem 0; }
+  .game h2 { margin: 0 0 .3rem; font-size: 1.35rem; }
+  .game p { margin: .3rem 0 .8rem; }
+  a { color: var(--yellow); }
+  a.play { display: inline-block; border: 2px solid var(--yellow); border-radius: 6px; padding: .45rem 1rem; text-decoration: none; font-weight: bold; margin-right: .8rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Paper games</h1>
+  <p>Browser games built from research papers, for teaching. Each runs on a phone or a projector.</p>
+  <div class="game">
+    <h2>What Gets Counted</h2>
+    <p>Holmstr&ouml;m &amp; Milgrom (1991), multitask principal&ndash;agent. Set a bonus, watch a worker&rsquo;s day shift toward what is paid, and find out when paying for performance backfires, and how job design fixes it.</p>
+    <a class="play" href="Multitask/what-gets-counted.html">Play</a><a href="Multitask/memo.md">Design memo</a>
+  </div>
+</main>
+</body>
+</html>

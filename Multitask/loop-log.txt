@@ -1,0 +1,83 @@
+PLAN 8,0,split,10,split,12
+
+[ROUND 1 OF 4 · THE SALES REP]
+  question: Sam sells, and builds goodwill with customers. Only sales can be counted. Pay Sam a bonus per sales point: none, a little, or a lot?
+  do now:   Turn the dial: watch the day change. Then press PAY.
+  task:     SELL · counted ✓ · each hour is worth $10 to the firm
+  task:     BUILD CUSTOMER GOODWILL · not counted ✗ · each hour is worth $5 to the firm
+  dial NO BONUS                 day: Normal day: 4 h selling, 4 h goodwill.
+  dial $4 PER SALES POINT       day: +1 h 10 min selling, −30 min goodwill; 45 min overtime.
+  dial $8 PER SALES POINT       day: +2 h 25 min selling, −1 h goodwill; 1 h 25 min overtime.
+  -- PAID --
+  counted Sales points: 4 → 6½ (rose by about half).
+  day     Uncounted goodwill: 4 h → 3 h.
+  sum     Value of the work $79 − extra pay for the extra effort $10 = $69 a day.
+  base    With no bonus: $60 a day.
+  best    Best bonus by the paper’s formula: $8 a point: $70 a day.
+  say     Close to the best: a bonus pays here, because goodwill is worth little and competes only mildly for Sam’s hours. But not the full $10 a sales hour is worth: some goodwill is still lost.
+
+[ROUND 2 OF 4 · THE TEACHER]
+  question: Ms. Ortiz drills her class for the test and makes them curious. Only test scores can be counted. Pay her a bonus per test point: none, a little, or a lot?
+  do now:   Turn the dial: watch the day change. Then press PAY.
+  task:     DRILL FOR THE TEST · counted ✓ · each hour is worth $12 to the school
+  task:     MAKE THEM CURIOUS · not counted ✗ · each hour is worth $30 to the school
+  dial NO BONUS                 day: Normal day: 4 h drilling, 4 h curiosity.
+  dial NO BONUS                 day: Normal day: 4 h drilling, 4 h curiosity.
+  dial NO BONUS                 day: Normal day: 4 h drilling, 4 h curiosity.
+  -- PAID --
+  counted Test points: 4 → 4 (stayed the same).
+  day     Uncounted curiosity: 4 h → 4 h.
+  sum     Value of the work $168 − extra pay for the extra effort $0 = $168 a day.
+  base    With no bonus: $168 a day.
+  best    Best bonus by the paper’s formula: none: $168 a day.
+  say     No bonus: her day stays balanced, and that is the best this job allows. Unlike Sam’s goodwill, curiosity is worth more than the counted work and competes hard for her hours.
+
+[ROUND 3 OF 4 · TWO SALES REPS]
+  question: Two years on, Sam’s firm sells subscriptions: customers who are looked after renew. Who does what? Then one bonus per sales point.
+  do now:   Tap two cards to swap them between the reps. Turn the dial. Then press PAY.
+  deal:     win->Sam, upsell->Kim, onboard->Sam, help->Kim
+  swapped cards 1 and 2 -> 0011
+  dial NO BONUS                 day: Sam: Normal day: 4 h new customers, 4 h upgrades. | Kim: Normal day: 4 h set-ups, 4 h customer problems.
+  dial $5 PER SALES POINT       day: Sam: +55 min new customers, +55 min upgrades; 1 h 50 min overtime. | Kim: Normal day: 4 h set-ups, 4 h customer problems.
+  dial $10 PER SALES POINT      day: Sam: +1 h 50 min new customers, +1 h 50 min upgrades; 3 h 35 min overtime. | Kim: Normal day: 4 h set-ups, 4 h customer problems.
+  -- PAID --
+  counted Sales points: 8 → 11½ (rose by about half).
+  day     Sam: 5 h 50 min new customers, 5 h 50 min upgrades (3 h 35 min overtime).
+  day     Kim: 4 h set-ups, 4 h customer problems.
+  sum     Value of the work $276 − extra pay for the extra effort $18 = $258 a day.
+  base    With no bonus (same jobs): $240 a day.
+  best    Best by the paper: new customers and upgrades to one rep, set-ups and customer problems to the other, and pay $10 a point: $258 a day. With mixed jobs the best is $2 a point: $241.
+  say     With the counted work in one job, the bonus pulls nothing from the rest: Kim keeps setting up customers and solving their problems whatever you pay. Strong pay where it does no harm. Many software firms are organised this way: account executives on commission win deals, customer-success managers on mostly fixed pay keep customers renewing.
+
+[ROUND 4 OF 4 · TWO TEACHERS]
+  question: Back at the school: two teachers, four tasks. Who does what? Then one bonus per test point for both.
+  do now:   Tap two cards to swap them between the teachers. Turn the dial. Then press PAY.
+  deal:     read->Ms. Ortiz, math->Mr. Ade, talk->Ms. Ortiz, proj->Mr. Ade
+  swapped cards 1 and 2 -> 0011
+  dial NO BONUS                 day: Ms. Ortiz: Normal day: 4 h reading drills, 4 h math drills. | Mr. Ade: Normal day: 4 h discussion, 4 h projects.
+  dial $6 PER TEST POINT        day: Ms. Ortiz: +1 h reading drills, +1 h math drills; 1 h 55 min overtime. | Mr. Ade: Normal day: 4 h discussion, 4 h projects.
+  dial $12 PER TEST POINT       day: Ms. Ortiz: +1 h 55 min reading drills, +1 h 55 min math drills; 3 h 50 min overtime. | Mr. Ade: Normal day: 4 h discussion, 4 h projects.
+  -- PAID --
+  counted Test points: 8 → 12 (rose by about half).
+  day     Ms. Ortiz: 5 h 55 min reading drills, 5 h 55 min math drills (3 h 50 min overtime).
+  day     Mr. Ade: 4 h discussion, 4 h projects.
+  sum     Value of the work $382 − extra pay for the extra effort $23 = $359 a day.
+  base    With no bonus (same jobs): $336 a day.
+  best    Best by the paper: reading drills and math drills to one teacher, discussion and projects to the other, and pay $12 a point: $359 a day. With mixed jobs the best is no bonus: $336.
+  say     With the counted work in one job, the bonus pulls nothing from the rest: Mr. Ade keeps the discussion and projects whatever you pay. Strong pay where it does no harm.
+
+==== VERDICT ====
+FATE: You paid like the paper: a bonus where it helps, none where it hurts, and full pay once the job was split.
+SCORE: Net over the four rounds: $855 a day, where the best possible is $855 — all of the best.
+PAPER: When a job has work that can be counted and work that can’t, paying for the counted work pulls effort from the rest. So the right bonus for one task depends on every other task in the job: worth paying for Sam’s sales, not for Ms. Ortiz’s test points, even though the test measures perfectly and she responds to pay. The way out is job design: put the countable work in one job with strong pay, and the rest in another on a salary.
+FOUND: Sam: $8 a point ($70 of a possible $70). Ms. Ortiz: no bonus ($168 of $168). Two sales reps: split jobs, $10 a point ($258 of $258). Two teachers: split jobs, $12 a point ($359 of $359).
+PART: Nowhere: you found all four answers the paper’s model gives.
+THEN: The paper read real organisations this way in 1991: franchisees keep at least 90 cents of every extra dollar of sales, while managers of identical company-owned stores get no incentive pay; firms keep their own sales force where sales are hard to measure; and in 1989 a South Carolina teacher was caught giving her class the answers to the state test to raise her rating.
+TODAY:
+  - Goodhart’s law, in the anthropologist Marilyn Strathern’s words (1997): “When a measure becomes a target, it ceases to be a good measure.” This game shows one reason: the target pulls effort from everything it leaves out.
+  - Wells Fargo, 2016: chasing cross-selling targets, staff opened about 1.5 million bank accounts and applied for about 565,000 credit cards that customers had not asked for. Regulators fined the bank $185 million.
+  - Round 4 is how much of software sales works today: account executives on heavy commission win the deals, customer-success managers on mostly fixed pay keep customers renewing.
+  - AI games measures too. In 2016 an OpenAI agent rewarded for points in a boat race learned to circle a lagoon hitting the same targets instead of finishing the race. Language models tuned to please an automatic rater can keep raising its score while getting worse by a stricter judge (Gao, Schulman and Hilton, 2023). AI researchers call it reward hacking.
+  - AI also makes more work countable: calls, code and written answers can now be scored automatically. The paper’s warning still holds: paying on a new number helps only if what it leaves out does not suffer. And where AI takes over the countable tasks, the human job keeps the hard-to-count ones — where, by this paper, strong pay for numbers works worst.
+  - Holmström’s informativeness principle says to base pay on every signal that tells you about effort. This paper adds the catch: a precise signal can still be the wrong thing to pay on, if it pulls attention from what it leaves out.
+ASK: Before you pay on a number, ask: what does it leave out, and does that compete for the same hours?

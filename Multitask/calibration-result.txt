@@ -1,0 +1,23 @@
+calibration.js run 2026-11-24T13:17:48.211Z  -- all gates passed
+PASS Best response = brute-force maximum of bonus income minus effort cost (300 random workers, incl. corners): worst shortfall 0.0000   [eq. 2; < 0.02]
+PASS Eq. 7: alpha1 = (B1 - B2 C12/C22) / [1 + r s1^2 (C11 - C12^2/C22)] matches the numerical optimum: worst gap $0.005 over 396 interior cases   [grid $0.01; tolerance $0.02]
+PASS Eq. 5 benchmark (independent tasks, k = 0): alpha = B1 / (1 + r C11 s1^2): 5.5556 vs 5.5556   [c = 1/a = 2]
+PASS p. 32: complementary tasks (C12 < 0) raise the bonus; more complementary, higher: 7.40 > 6.60 > 5.80 > 5.00
+PASS p. 33: zero bonus optimal even with a perfect measure (s1^2 = 0) when B1 <= B2 C12/C22: 0, 0, 0   [all zero]
+PASS Section 3 limit (near-perfect substitutes, k = 0.99): a small bonus empties the unpaid task: at $0.50 the unpaid task gets 0.00 h   [all-or-nothing, as with C(t1 + t2)]
+PASS Extra pay = 1/2 x bonus x extra counted hours, for every dial position and deal in the game: worst gap $3.6e-15   [C = 1/2 alpha'(t - tbar) at an interior best response]
+PASS No task is emptied anywhere on the game's dial (so the on-screen rules are exact): all interior
+PASS Toy: splitting beats mixing exactly when bM^2 (1 - k) > (bM - k bU)^2 (300 random schools, fine dial): 272 of 272 agree (28 draws with an emptied task skipped)   [all]
+PASS Prop. 7 shape (toy): after a split, the uncounted-task worker works no overtime and no more hours: 240 of 240   [all]
+PASS Round 1 (sales rep): best bonus on the dial = eq. 7, positive but below the value of a sales hour: $8 vs eq. 7 $8   [interior]
+PASS Round 2 (teacher): best bonus on the dial = eq. 7: $0 vs eq. 7 $0   [$0: fixed wage (Prop. 1 logic)]
+PASS Round 4 (two teachers): best = split jobs, full-value bonus for the counted job: split, $12   [split, $12]
+PASS Round 3 (two sales reps, subscriptions): best = split jobs, full-value bonus for the counted job: split, $10   [split, $10]
+PASS Rounds 3-4: with mixed jobs only a weak bonus is worth paying: teachers $0, sales reps $2   [$0 and at most $3]
+PASS Round 3: round 1's answer, kept with mixed jobs, now loses money: $230 vs $240 with no bonus   [care now worth more than selling]
+PASS Robustness: round 1 best stays positive and below a sales hour's value under every 20% change: R1 best in {8}   [$1-$9]
+PASS Robustness: round 2 best stays $0 under every 20% change: R2 best in {0}   [$0]
+PASS Robustness: rounds 3 and 4 stay "split" under every 20% change: 16 of 16   [all]
+INFO robustness detail: teacher a x0.8: R1 $8, R2 $0, R3 split, R4 split | teacher a x1.2: R1 $8, R2 $0, R3 split, R4 split | teacher kappa x0.8: R1 $8, R2 $0, R3 split, R4 split | teacher kappa x1.2: R1 $8, R2 $0, R3 split, R4 split | sales a x0.8: R1 $8, R2 $0, R3 split, R4 split | sales a x1.2: R1 $8, R2 $0, R3 split, R4 split | sales kappa x0.8: R1 $8, R2 $0, R3 split, R4 split | sales kappa x1.2: R1 $8, R2 $0, R3 split, R4 split | firm a x0.8: R1 $8, R2 $0, R3 split, R4 split | firm a x1.2: R1 $8, R2 $0, R3 split, R4 split | firm kappa x0.8: R1 $8, R2 $0, R3 split, R4 split | firm kappa x1.2: R1 $8, R2 $0, R3 split, R4 split | school kappa x0.8: R1 $8, R2 $0, R3 split, R4 split | school kappa x1.2: R1 $8, R2 $0, R3 split, R4 split | teacher value drill x0.8: R2 $0 | teacher value drill x1.2: R2 $0 | teacher value curious x0.8: R2 $0 | teacher value curious x1.2: R2 $0 | firm care value x0.8: R4 split | firm care value x1.2: R4 split
+INFO Round 2 best is $0 because B1 = 12 < k B2 = 0.6 x 30 = 18 (the paper's condition, p. 33); round 1 shows the other side (10 > 0.4 x 5).
+INFO Round 3 needs valuable customer care: with care at round 1's $5 an hour, the toy prefers mixed jobs with an $8 bonus ($139.2 vs $138 split). The paper's own case for grouping (risk premia) is not in the toy.

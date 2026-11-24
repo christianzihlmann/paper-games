@@ -1,0 +1,45 @@
+<h2>About this game</h2>
+<p><b>The paper.</b> Bengt Holmstr&ouml;m and Paul Milgrom (1991), &ldquo;Multitask Principal&ndash;Agent Analyses: Incentive Contracts, Asset Ownership, and Job Design,&rdquo; <i>Journal of Law, Economics, &amp; Organization</i> 7 (Special Issue): 24&ndash;52. <a href="https://doi.org/10.1093/jleo/7.special_issue.24" target="_blank" rel="noopener">doi.org/10.1093/jleo/7.special_issue.24</a>. Game built from this paper; the paper is the authority where the two disagree.</p>
+
+<p><b>What the paper found.</b> When a worker has several tasks and only some can be measured, pay does more than motivate: it decides where the worker&rsquo;s attention goes. A bonus on the measured task pulls hours away from the others. So the right bonus for one task depends on the whole job. If the unmeasured task matters enough and competes for the same hours, the best contract pays a fixed wage, even when the measured task is measured perfectly and the worker responds to pay. The paper uses this to explain why fixed wages are so common, why employees get weaker incentives than independent contractors, why firms restrict personal business on company time, and why jobs are designed so that easy-to-measure tasks and hard-to-measure tasks go to different people.</p>
+
+<p><b>What you play.</b> The employer in the paper&rsquo;s model, in two jobs: selling and teaching. You set one bonus per counted point, and the worker re-divides the day in the way that is best for them, as the model predicts. In rounds 3 and 4 you also decide which tasks go into which job. Round 3 assumes the sales firm now sells subscriptions, so looking after customers is worth $20 an hour instead of round 1&rsquo;s $5. With care worth only $5, splitting the sales job would gain nothing in this model.</p>
+
+<p><b>Mechanism: ported</b>, rounds 1 and 2. It is the paper&rsquo;s linear model (Section 2) with measured output equal to hours on the counted task, and a worker whose effort costs nothing up to a normal day and more and more beyond it (Section 3.1). The two tasks compete for the same hours with a strength we chose. Values per hour are linear, and there is no measurement noise or risk aversion. The best bonus on screen is the paper&rsquo;s equation (7). <b>Rounds 3 and 4 are a toy</b> of the paper&rsquo;s Section 5: two workers and four tasks, where the paper has a continuum of tasks. In the toy, splitting the jobs pays off through the extra effort it allows on counted work, and only when the uncounted work is valuable enough. The paper&rsquo;s own argument also runs through the smaller risk premia of a well-grouped job.</p>
+
+<p><b>The game demonstrates</b> that, in this model, a bonus on a counted task moves hours away from an uncounted one. Whether that pays depends on what the uncounted task is worth and how strongly the two compete. Grouping counted tasks into one job lets strong pay go where it harms nothing.</p>
+<p><b>The game assumes</b> numbers we chose, which the paper does not give:</p>
+<ul>
+<li>the worth of each hour;</li>
+<li>the eight-hour normal day split evenly;</li>
+<li>how strongly the tasks compete and how much a $1 bonus moves;</li>
+<li>no risk.</li>
+</ul>
+<p>The names are ours.</p>
+<p><b>The paper establishes</b> the conditions under which these patterns follow, as propositions about a model, not as measurements. It reads them against evidence from others:</p>
+<ul>
+<li>franchisees keep at least 90% of each extra dollar of sales, while managers of company-owned stores get no incentive pay (Krueger; Brickley and Dark);</li>
+<li>firms use their own sales force where sales are hard to measure (Anderson and Schmittlein);</li>
+<li>the 1989 teacher in Greenville, South Carolina, who gave her class the answers to the state test to raise her rating (<i>Wall Street Journal</i>, 2 November 1989).</li>
+</ul>
+<p>A game outcome is a simulation and adds no evidence of its own.</p>
+
+<p><b>Left out:</b></p>
+<ul>
+<li>asset ownership: why the owner of a franchise gets strong incentives and a store manager none (Proposition 2);</li>
+<li>limits on personal business at work: the more strongly a worker is paid for results, the freer they can be left (Propositions 3&ndash;4);</li>
+<li>the role of risk and noisy measures in all of it.</li>
+</ul>
+
+<p><b>For the lecture.</b> Sources for the end screen:</p>
+<ul>
+<li>Holmstr&ouml;m (1979), &ldquo;Moral Hazard and Observability,&rdquo; <i>Bell Journal of Economics</i> 10: 74&ndash;91: the informativeness principle.</li>
+<li>Holmstr&ouml;m and Milgrom (1987), <i>Econometrica</i> 55: 303&ndash;328: the linear model used here.</li>
+<li>Baker (1992), &ldquo;Incentive Contracts and Performance Measurement,&rdquo; <i>Journal of Political Economy</i> 100: 598&ndash;614: when a measure is out of line with what the firm wants.</li>
+<li>Kerr (1975), &ldquo;On the Folly of Rewarding A, While Hoping for B,&rdquo; <i>Academy of Management Journal</i> 18: 769&ndash;783.</li>
+<li>Goodhart (1975), on monetary targets; Strathern (1997), &ldquo;&lsquo;Improving ratings&rsquo;: audit in the British University system,&rdquo; <i>European Review</i> 5: 305&ndash;321, for the wording &ldquo;when a measure becomes a target&rdquo;.</li>
+<li>Wells Fargo: consent orders of the Consumer Financial Protection Bureau and the Office of the Comptroller of the Currency, and the Los Angeles settlement, 8 September 2016 ($100M + $35M + $50M).</li>
+<li>OpenAI (2016), &ldquo;Faulty Reward Functions in the Wild&rdquo; (the CoastRunners boat race).</li>
+<li>Gao, Schulman and Hilton (2023), &ldquo;Scaling Laws for Reward Model Overoptimization,&rdquo; ICML.</li>
+</ul>
+<p class="fine">Built in one run from the published paper (a scanned copy, read page by page). The paper reports no numbers; every number the game uses sits in the commented CONFIG block at the top of its source. Type: Patrick Hand and Cabin Sketch (SIL Open Font License).</p>

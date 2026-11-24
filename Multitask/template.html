@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>What Gets Counted</title>
+<style>
+@font-face { font-family: 'Patrick Hand'; font-weight: 400; src: url(data:font/woff2;base64,/*__F_HAND__*/) format('woff2'); }
+@font-face { font-family: 'Cabin Sketch'; font-weight: 700; src: url(data:font/woff2;base64,/*__F_SKETCH__*/) format('woff2'); }
+:root {
+  --board: #22352B;    /* blackboard */
+  --chalk: #F1EEE4;    /* chalk */
+  --yellow: #F2CF5B;   /* counted work */
+  --blue: #8DC0E0;     /* uncounted work */
+  --coral: #EE8A6E;    /* overtime, extra pay */
+  --chalk-soft: rgba(241, 238, 228, .68);
+  --chalk-faint: rgba(241, 238, 228, .22);
+}
+* { box-sizing: border-box; }
+/* scales up on a projector: the whole layout is in rem */
+html { font-size: clamp(16px, calc(0.55vw + 0.85vh + 6px), 28px); }
+html, body { margin: 0; padding: 0; background: var(--board); color: var(--chalk); }
+body { font-family: 'Patrick Hand', 'Comic Sans MS', cursive; font-size: 1.06rem; line-height: 1.3; -webkit-text-size-adjust: 100%;
+  background-image: radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.05), transparent 55%), radial-gradient(ellipse at 80% 70%, rgba(255,255,255,.04), transparent 50%); background-attachment: fixed; min-height: 100vh; }
+.chalk, body { text-shadow: 0 0 1px rgba(241, 238, 228, .45); }
+button { font-family: inherit; color: inherit; }
+[hidden] { display: none !important; }
+.wrap { max-width: 30rem; margin: 0 auto; padding: .6rem 1rem 1.6rem; }
+h1, h2, .sketch { font-family: 'Cabin Sketch', 'Patrick Hand', cursive; font-weight: 700; letter-spacing: .02em; margin: 0; }
+p { margin: 0 0 .6rem; }
+.soft { color: var(--chalk-soft); }
+.y { color: var(--yellow); } .b { color: var(--blue); } .c { color: var(--coral); }
+
+/* chalk-drawn buttons: crooked rectangles */
+.chalkbtn { display: block; width: 100%; min-height: 3rem; padding: .5rem .8rem; background: transparent; border: 2.5px solid var(--chalk);
+  border-radius: 7px 13px 9px 15px / 12px 8px 14px 9px; font-family: 'Cabin Sketch', cursive; font-weight: 700; font-size: 1.25rem; letter-spacing: .05em;
+  cursor: pointer; transform: rotate(-.6deg); -webkit-tap-highlight-color: transparent; }
+.chalkbtn:active, .chalkbtn.dust { background: rgba(241, 238, 228, .12); }
+.chalkbtn.small { width: 2.8rem; min-height: 2.8rem; padding: 0; font-size: 1.5rem; transform: rotate(1deg); flex: none; }
+.chalkbtn.pay { border-color: var(--yellow); color: var(--yellow); }
+.link { background: none; border: none; padding: .5rem .5rem; font-size: 1.05rem; text-decoration: underline; cursor: pointer; }
+.qbtn { flex: none; width: 2.3rem; height: 2.3rem; border: 2px solid var(--chalk); border-radius: 50% 45% 52% 48%; background: transparent; font-family: 'Cabin Sketch', cursive; font-size: 1.2rem; cursor: pointer; }
+.sig { margin-top: 1.4rem; text-align: center; font-size: .9rem; color: var(--chalk-soft); }
+
+/* start */
+.title { font-size: 2.6rem; line-height: 1; margin: 1.2rem 0 .3rem; }
+.clip { border: 2px dashed var(--chalk-faint); border-radius: 6px; padding: .6rem .8rem; margin: .8rem 0 1rem; transform: rotate(-.8deg); font-size: 1rem; }
+.clip .when { font-family: 'Cabin Sketch', cursive; font-weight: 700; color: var(--coral); margin-right: .3rem; }
+.aimbig { font-family: 'Cabin Sketch', cursive; font-weight: 700; font-size: 1.35rem; border-top: 2px solid var(--chalk-faint); border-bottom: 2px solid var(--chalk-faint); padding: .5rem 0; margin: .8rem 0 1rem; }
+.links { text-align: center; margin-top: .3rem; }
+
+/* a round */
+.top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+.hdr { font-family: 'Cabin Sketch', cursive; font-weight: 700; font-size: 1.05rem; letter-spacing: .04em; }
+.aim { font-size: .92rem; color: var(--chalk-soft); margin: 0 0 .25rem; }
+.question { font-size: 1.12rem; margin: .1rem 0 .4rem; }
+.legend { display: grid; gap: .15rem; margin: 0 0 .25rem; font-size: .95rem; }
+.legend .chip { display: inline-block; width: .9rem; height: .75rem; border: 2px solid; margin-right: .35rem; vertical-align: -.05rem; border-radius: 2px; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: .3rem .5rem; margin: .1rem 0 .3rem; }
+.cards .who { font-family: 'Cabin Sketch', cursive; font-weight: 700; text-align: center; font-size: 1rem; }
+.card { text-align: left; background: transparent; border: 2px solid; border-radius: 6px 10px 7px 11px; padding: .25rem .45rem; min-height: 2.6rem; font-size: .95rem; line-height: 1.1; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.card.counted { border-color: var(--yellow); color: var(--yellow); }
+.card.uncounted { border-color: var(--blue); color: var(--blue); }
+.card .sm { display: block; font-size: .8rem; color: var(--chalk-soft); }
+.card.sel { outline: 2.5px dashed var(--chalk); outline-offset: 3px; }
+.daybox { margin: .1rem 0 .2rem; }
+.day { display: block; width: 100%; height: auto; }
+.dayline { font-size: .92rem; color: var(--chalk-soft); margin: -.1rem 0 .3rem; min-height: 1.2em; }
+.donow { font-size: 1rem; margin: .2rem 0 .1rem; }
+.dialrow { display: flex; align-items: center; gap: .4rem; }
+.dial { flex: 1; height: auto; touch-action: none; cursor: pointer; }
+.dial:focus { outline: none; } .dial:focus-visible { outline: 2px dashed var(--chalk-faint); outline-offset: 2px; }
+.bonuslabel { text-align: center; font-family: 'Cabin Sketch', cursive; font-weight: 700; font-size: 1.5rem; color: var(--yellow); margin: .05rem 0 .4rem; }
+.ledger { margin: .3rem 0 .6rem; }
+.ledger p { margin: 0 0 .35rem; animation: write .45s ease-out both; }
+.ledger p.sum { font-size: 1.12rem; }
+.ledger p.best { color: var(--chalk-soft); }
+.ledger p.say { border-left: 3px solid var(--coral); padding-left: .5rem; }
+@keyframes write { from { clip-path: inset(0 100% 0 0); opacity: .3; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+.smudge { animation: smudge .9s ease-out forwards; }
+@keyframes smudge { from { opacity: .35; } to { opacity: 0; } }
+
+@media (min-width: 900px) and (min-aspect-ratio: 5/4) {
+  html { font-size: clamp(18px, calc(1.25vw + 1vh), 34px); }
+  #s-round { max-width: 62rem; margin: 0 auto; }
+  .wrap:has(#s-round:not([hidden])) { max-width: 62rem; }
+  .cols { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0 2rem; align-items: start; }
+  .right { padding-top: .4rem; }
+}
+/* verdict */
+.fate { font-size: 1.7rem; line-height: 1.1; margin: .8rem 0 .5rem; }
+.sec { margin: .7rem 0 0; }
+.sec .lab { display: block; font-family: 'Cabin Sketch', cursive; font-weight: 700; font-size: .95rem; letter-spacing: .05em; color: var(--yellow); }
+
+.today { margin: .2rem 0 0; padding-left: 1.1rem; }
+.today li { margin: 0 0 .45rem; }
+.ask { font-family: 'Cabin Sketch', cursive; font-weight: 700; font-size: 1.2rem; color: var(--yellow); border: 2px dashed var(--chalk-faint); border-radius: 8px; padding: .5rem .7rem; margin: .8rem 0 1rem; transform: rotate(-.6deg); }
+/* overlays */
+.overlay { position: fixed; inset: 0; background: var(--board); overflow-y: auto; z-index: 10; }
+.overlay h2 { font-size: 1.4rem; margin: .4rem 0 .6rem; }
+.overlay p { font-size: 1rem; }
+.overlay a { color: var(--yellow); }
+.fine { font-size: .85rem; color: var(--chalk-soft); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="chalky" x="-5%" y="-20%" width="110%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="1.8"/></filter>
+    <pattern id="hy" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><line x1="0" y1="0" x2="0" y2="5" stroke="#F2CF5B" stroke-width="1.6" opacity=".75"/></pattern>
+    <pattern id="hb" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)"><line x1="0" y1="0" x2="0" y2="5" stroke="#8DC0E0" stroke-width="1.6" opacity=".75"/></pattern>
+  </defs>
+</svg>
+<div class="wrap">
+
+<section class="screen" id="s-start">
+  <h1 class="title">WHAT<br>GETS<br>COUNTED</h1>
+  <div class="clip"><span class="when">1989.</span>Greenville, South Carolina: a teacher is caught giving her class the answers to the state test &mdash; to raise her own performance rating.</div>
+  <p>Four rounds, two jobs: selling and teaching. In each, turn a bonus dial and watch a worker&rsquo;s day change. Then press PAY.</p>
+  <div class="aimbig">Pay your people so the work gets done best.</div>
+  <button class="chalkbtn" id="b-start">START</button>
+  <div class="links"><button class="link" id="b-help0">How to play</button> &middot; <button class="link" id="b-about0">About</button></div>
+  <footer class="sig">Built from the paper.</footer>
+</section>
+
+<section class="screen" id="s-round" hidden>
+  <div class="top"><span class="hdr" id="hdr"></span><button class="qbtn" data-help aria-label="How to play">?</button></div>
+  <div class="aim">Pay your people so the work gets done best.</div>
+  <div class="cols"><div class="left">
+  <p class="question" id="question"></p>
+  <div class="legend" id="legend"></div>
+  <div class="cards" id="cards" hidden></div>
+  <div id="days"></div>
+  </div><div class="right">
+  <div id="controls">
+    <div class="donow" id="donow"></div>
+    <div class="dialrow">
+      <button class="chalkbtn small" id="b-minus" aria-label="Less bonus">&minus;</button>
+      <svg class="dial" id="dial" viewBox="0 0 300 46" role="slider" aria-label="Bonus per counted point" tabindex="0"></svg>
+      <button class="chalkbtn small" id="b-plus" aria-label="More bonus">+</button>
+    </div>
+    <div class="bonuslabel" id="bonuslabel"></div>
+    <button class="chalkbtn pay" id="b-pay"></button>
+  </div>
+  <div class="ledger" id="ledger" hidden></div>
+  <button class="chalkbtn" id="b-next" hidden></button>
+  </div></div>
+</section>
+
+<section class="screen" id="s-verdict" hidden>
+  <div class="top"><span class="hdr">THE VERDICT</span><button class="qbtn" data-help aria-label="How to play">?</button></div>
+  <h2 class="fate" id="v-fate"></h2>
+  <p id="v-score"></p>
+  <div class="sec"><span class="lab">WHAT THE PAPER FOUND</span><span id="v-paper"></span></div>
+  <div class="sec"><span class="lab">WHAT YOU FOUND</span><span id="v-found"></span></div>
+  <div class="sec"><span class="lab">WHERE YOU PART</span><span id="v-part"></span></div>
+  <div class="sec"><span class="lab">IN 1991</span><span id="v-then"></span></div>
+  <div class="sec"><span class="lab">TODAY: WHEN A MEASURE BECOMES A TARGET</span><ul class="today" id="v-today"></ul></div>
+  <p class="ask" id="v-ask"></p>
+  <button class="chalkbtn" id="b-again">PLAY AGAIN</button>
+  <div class="links"><button class="link" id="b-about1">About the paper</button></div>
+  <footer class="sig">Built from the paper.</footer>
+</section>
+</div>
+
+<div class="overlay" id="help" hidden><div class="wrap">
+  <div class="top"><span class="hdr">HOW TO PLAY</span><button class="qbtn" id="b-helpx" aria-label="Close">&times;</button></div>
+  <h2>Pay your people so the work gets done best.</h2>
+  <p>Each round shows one job with work that is <span class="y">counted &#10003;</span> (test scores, sales) and work that is <span class="b">not counted &#10007;</span> (curiosity, customer goodwill). Each hour of each kind is worth a stated amount to the employer.</p>
+  <p><b>The day</b> is a row of chalk boxes, one per hour. Without a bonus the worker gives a normal eight-hour day, split evenly. <b>Turn the dial</b> to offer a bonus per counted point (one point per counted hour). The day redraws as the worker would answer: more hours on what is paid, fewer on what is not, and some overtime past the normal day.</p>
+  <p><b>Press PAY</b> to commit. The board then sums it up. The value of the work, minus the extra pay that the worker&rsquo;s extra effort costs you, gives the net for the day. The extra pay is half of the bonus on the extra points; the rest of the bonus comes back to you through a lower base salary. Below that sits the best the paper&rsquo;s formula allows.</p>
+  <p><b>Rounds 3 and 4:</b> two workers, four tasks (two sales reps, then two teachers). Tap two cards to swap them between the workers, then set one bonus for both.</p>
+  <p><b>In class:</b> project it. Before each PAY, ask the room &mdash; none, a little, or a lot? &mdash; and count hands. The arrow keys turn the dial; Enter pays and moves on.</p>
+  <button class="chalkbtn" id="b-helpback">BACK</button>
+</div></div>
+
+<div class="overlay" id="about" hidden><div class="wrap">
+  <div class="top"><span class="hdr">ABOUT</span><button class="qbtn" id="b-aboutx" aria-label="Close">&times;</button></div>
+/*__ABOUT__*/
+  <button class="chalkbtn" id="b-aboutback">BACK</button>
+</div></div>
+
+<script>
+/*__MECHANISM__*/
+</script>
+<script>
+/*__GAME__*/
+</script>
+<script>
+(function () {
+'use strict';
+const M = window.Mech, G = window.Game, C = M.CONFIG;
+const $ = s => document.querySelector(s);
+const NS = 'http://www.w3.org/2000/svg';
+let g = G.newGame();
+let prevDays = {};
+window.__game = { get state() { return g; }, M, G };
+
+function show(id) { document.querySelectorAll('.screen').forEach(s => { s.hidden = s.id !== id; }); window.scrollTo(0, 0); }
+function el(tag, attrs, parent, text) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text !== undefined) e.textContent = text; if (parent) parent.appendChild(e); return e; }
+function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+const COL = { counted: '#F2CF5B', uncounted: '#8DC0E0', coral: '#EE8A6E', chalk: '#F1EEE4' };
+
+// ---------- one worker's day: hour boxes ----------
+const HOUR = 25.5, X0 = 4, MAXH = 13.4;
+function segments(w, tasks) { let at = 0; const order = tasks.map((_, i) => i).sort((i, j) => (tasks[i].counted ? 1 : 0) - (tasks[j].counted ? 1 : 0)); return order.map(i => { const s = { from: at, to: at + w.hours[i], counted: tasks[i].counted }; at += w.hours[i]; return s; }); }
+function colourAt(segs, x) { for (const s of segs) if (x >= s.from - 1e-9 && x < s.to - 1e-9) return s.counted ? 'y' : 'b'; return ''; }
+function drawDay(svg, key, name, w, tasks, unit) {
+  clear(svg);
+  const segs = segments(w, tasks), base = 22, hgt = 28;
+  el('text', { x: X0, y: 13, 'font-size': 13, fill: COL.chalk, 'font-family': 'Patrick Hand, cursive' }, svg, name + '’s day');
+  if (w.counted > 0) el('text', { x: 356, y: 13, 'font-size': 13, fill: COL.counted, 'text-anchor': 'end', 'font-family': 'Cabin Sketch, cursive', 'font-weight': 700 }, svg, unit.toUpperCase() + 'S: ' + fmtPts(w.counted));
+  // overtime zone
+  const total = w.hours[0] + w.hours[1], xEnd = X0 + C.normalDay * HOUR;
+  if (total > C.normalDay + 1e-6) el('rect', { x: xEnd, y: base - 3, width: (total - C.normalDay) * HOUR, height: hgt + 6, fill: 'none', stroke: COL.coral, 'stroke-width': 1.6, 'stroke-dasharray': '4 3', rx: 3 }, svg);
+  const gBoxes = el('g', { filter: 'url(#chalky)' }, svg);
+  for (const s of segs) {
+    for (let k = Math.floor(s.from); k < s.to - 1e-9; k++) {
+      const a = Math.max(s.from, k), b = Math.min(s.to, k + 1); if (b - a < 0.04) continue;
+      el('rect', { x: X0 + a * HOUR + 1.5, y: base, width: Math.max(1, (b - a) * HOUR - 3), height: hgt, fill: s.counted ? 'url(#hy)' : 'url(#hb)', stroke: s.counted ? COL.counted : COL.uncounted, 'stroke-width': 2, rx: 2 }, gBoxes);
+    }
+  }
+  // smudges where the chalk changed since the last drawing
+  const prev = prevDays[key];
+  if (prev) { for (let x = 0; x < MAXH; x += 0.25) { const o = colourAt(prev, x), n = colourAt(segs, x); if (o && o !== n) el('rect', { x: X0 + x * HOUR, y: base - 2, width: 0.25 * HOUR + 0.5, height: hgt + 4, fill: COL.chalk, class: 'smudge' }, svg); } }
+  prevDays[key] = segs;
+  el('line', { x1: xEnd, x2: xEnd, y1: base - 6, y2: base + hgt + 6, stroke: COL.chalk, 'stroke-width': 1.8, 'stroke-dasharray': '3 3' }, svg);
+  el('text', { x: xEnd - 4, y: base + hgt + 18, 'font-size': 11.5, fill: 'rgba(241,238,228,.75)', 'text-anchor': 'end', 'font-family': 'Patrick Hand, cursive' }, svg, 'normal day ends \u2192');
+  if (total > C.normalDay + 0.05) el('text', { x: xEnd + 4, y: base + hgt + 18, 'font-size': 11.5, fill: COL.coral, 'text-anchor': 'start', 'font-family': 'Patrick Hand, cursive' }, svg, 'overtime');
+}
+function fmtPts(x) { const r = Math.round(x * 2) / 2; return r % 1 ? Math.floor(r) + '½' : String(r); }
+
+// ---------- the dial ----------
+function drawDial(best) {
+  const svg = $('#dial'); clear(svg);
+  const x = v => 14 + (v - C.dialMin) / (C.dialMax - C.dialMin) * 272;
+  el('line', { x1: x(C.dialMin), x2: x(C.dialMax), y1: 18, y2: 18, stroke: COL.chalk, 'stroke-width': 3, 'stroke-linecap': 'round', filter: 'url(#chalky)' }, svg);
+  for (const v of M.dialValues()) {
+    el('line', { x1: x(v), x2: x(v), y1: 12, y2: 24, stroke: COL.chalk, 'stroke-width': v % 2 ? 1.2 : 2 }, svg);
+    if (v % 2 === 0) el('text', { x: x(v), y: 40, 'font-size': 13, fill: COL.chalk, 'text-anchor': 'middle', 'font-family': 'Patrick Hand, cursive' }, svg, '$' + v);
+  }
+  if (best !== undefined) { el('path', { d: 'M' + x(best) + ' 2 l-5 -0 l5 9 l5 -9 z', fill: COL.coral }, svg); }
+  el('circle', { cx: x(g.bonus), cy: 18, r: 9, fill: COL.counted, stroke: COL.chalk, 'stroke-width': 2, filter: 'url(#chalky)' }, svg);
+  svg.setAttribute('aria-valuenow', g.bonus);
+}
+function dialFromEvent(ev) {
+  const svg = $('#dial'), r = svg.getBoundingClientRect();
+  const u = (ev.clientX - r.left) / r.width * 300;
+  const v = C.dialMin + (u - 14) / 272 * (C.dialMax - C.dialMin);
+  setBonus(v);
+}
+function setBonus(v) { if (g.paid) return; const before = g.bonus; G.setBonus(g, v); if (g.bonus !== before) renderLive(); }
+
+// ---------- a round ----------
+function startRound(n) { G.startRound(g, n); prevDays = {}; show('s-round'); renderRound(); }
+function renderRound() {
+  $('#hdr').textContent = G.header(g);
+  $('#question').textContent = G.question(g);
+  const r3 = G.ROUNDS[g.round].kind === 'design';
+  $('#legend').hidden = r3; $('#cards').hidden = !r3;
+  if (!r3) {
+    const J = C.jobs[G.ROUNDS[g.round].key];
+    $('#legend').innerHTML = J.tasks.map(tk => '<div><span class="chip" style="border-color:' + (tk.counted ? COL.counted : COL.uncounted) + ';background:' + (tk.counted ? 'rgba(242,207,91,.25)' : 'rgba(141,192,224,.25)') + '"></span>' +
+      '<span class="' + (tk.counted ? 'y' : 'b') + '">' + tk.name.toUpperCase() + '</span> · ' + (tk.counted ? 'counted ✓' : 'not counted ✗') + ' · each hour is worth $' + tk.value + ' to the ' + G.ROUNDS[g.round].employer + '</div>').join('');
+  } else renderCards();
+  $('#controls').hidden = g.paid; $('#ledger').hidden = !g.paid; $('#b-next').hidden = !g.paid;
+  renderLive();
+}
+function renderCards() {
+  const S = C.designs[G.ROUNDS[g.round].key], box = $('#cards');
+  let html = S.workers.map(w => '<div class="who">' + w + '</div>').join('');
+  for (let row = 0; row < 2; row++) for (let w = 0; w < 2; w++) {
+    const idx = g.deal.map((d, i) => d === w ? i : -1).filter(i => i >= 0)[row], tk = S.tasks[idx];
+    html += '<button class="card ' + (tk.counted ? 'counted' : 'uncounted') + (g.sel === idx ? ' sel' : '') + '" data-i="' + idx + '">' + tk.name + '<span class="sm">' + (tk.counted ? 'counted ✓' : 'not counted ✗') + ' · worth $' + tk.value + ' an hour</span></button>';
+  }
+  box.innerHTML = html;
+  box.querySelectorAll('.card').forEach(b => b.addEventListener('click', () => { if (g.paid) return; G.tapCard(g, Number(b.dataset.i)); renderCards(); renderLive(); }));
+}
+function renderLive() {
+  const o = G.outcome(g), days = $('#days');
+  const workers = G.workersOf(g, o);
+  if (days.children.length !== workers.length) { days.innerHTML = workers.map(x => '<div class="daybox"><svg class="day" viewBox="0 0 360 72"></svg><div class="dayline"></div></div>').join(''); }
+  workers.forEach((x, i) => { const box = days.children[i]; drawDay(box.querySelector('svg'), x.key, x.name, x.w, x.tasks, G.ROUNDS[g.round].unit); box.querySelector('.dayline').textContent = G.dayLine(x.w, x.tasks); });
+  $('#donow').textContent = G.doNow(g);
+  $('#bonuslabel').textContent = G.bonusLabel(g);
+  $('#b-pay').textContent = G.payLabel(g);
+  drawDial(g.paid ? G.best(g).bonus : undefined);
+}
+function doPay() {
+  if (g.paid) return;
+  const btn = $('#b-pay'); btn.classList.add('dust'); setTimeout(() => btn.classList.remove('dust'), 150);
+  G.pay(g);
+  $('#controls').hidden = true;
+  const L = $('#ledger'); L.hidden = false;
+  L.innerHTML = G.ledger(g).map((l, i) => '<p class="' + l.k + '" style="animation-delay:' + (i * 0.35) + 's">' + l.t + '</p>').join('');
+  const nb = $('#b-next'); nb.hidden = false; nb.textContent = g.round < G.N_ROUNDS ? 'NEXT ROUND →' : 'THE VERDICT →';
+  if (G.ROUNDS[g.round].kind === 'design') renderCards();
+}
+function doNext() {
+  if (!g.paid) return;
+  G.next(g);
+  if (g.screen === 'verdict') showVerdict(); else startRound(g.round);
+}
+function showVerdict() {
+  const v = G.verdict(g); show('s-verdict');
+  $('#v-fate').textContent = v.fate; $('#v-score').textContent = v.score;
+  $('#v-paper').textContent = v.paper; $('#v-found').textContent = v.found; $('#v-part').textContent = v.part; $('#v-then').textContent = v.then;
+  $('#v-today').innerHTML = ''; v.today.forEach(t => { const li = document.createElement('li'); li.textContent = t; $('#v-today').appendChild(li); });
+  $('#v-ask').textContent = v.ask;
+}
+
+// ---------- wiring ----------
+function openOverlay(id) { $('#' + id).hidden = false; $('#' + id).scrollTop = 0; }
+function closeOverlay(id) { $('#' + id).hidden = true; }
+document.querySelectorAll('[data-help]').forEach(b => b.addEventListener('click', () => openOverlay('help')));
+$('#b-help0').addEventListener('click', () => openOverlay('help'));
+['#b-helpx', '#b-helpback'].forEach(s => $(s).addEventListener('click', () => closeOverlay('help')));
+['#b-about0', '#b-about1'].forEach(s => $(s).addEventListener('click', () => openOverlay('about')));
+['#b-aboutx', '#b-aboutback'].forEach(s => $(s).addEventListener('click', () => closeOverlay('about')));
+$('#b-start').addEventListener('click', () => startRound(1));
+$('#b-minus').addEventListener('click', () => setBonus(g.bonus - C.dialStep));
+$('#b-plus').addEventListener('click', () => setBonus(g.bonus + C.dialStep));
+$('#b-pay').addEventListener('click', doPay);
+$('#b-next').addEventListener('click', doNext);
+$('#b-again').addEventListener('click', () => { g = G.newGame(); show('s-start'); });
+const dial = $('#dial'); let dragging = false;
+dial.addEventListener('pointerdown', ev => { dragging = true; dial.setPointerCapture(ev.pointerId); dialFromEvent(ev); });
+dial.addEventListener('pointermove', ev => { if (dragging) dialFromEvent(ev); });
+dial.addEventListener('pointerup', () => { dragging = false; });
+document.addEventListener('keydown', ev => {
+  if (!$('#help').hidden || !$('#about').hidden) { if (ev.key === 'Escape') { closeOverlay('help'); closeOverlay('about'); } return; }
+  if (!$('#s-start').hidden && ev.key === 'Enter') { startRound(1); ev.preventDefault(); return; }
+  if ($('#s-round').hidden) return;
+  if (ev.key === 'ArrowRight' || ev.key === 'ArrowUp') { setBonus(g.bonus + C.dialStep); ev.preventDefault(); }
+  else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowDown') { setBonus(g.bonus - C.dialStep); ev.preventDefault(); }
+  else if (ev.key === 'Enter') { if (g.paid) doNext(); else doPay(); ev.preventDefault(); }
+});
+show('s-start');
+})();
+</script>
+</body>
+</html>

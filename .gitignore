@@ -1,0 +1,6 @@
+# papers stay local (copyright); only the games are published
+*.pdf
+# not published yet
+Liebman/
+# system files
+.DS_Store
